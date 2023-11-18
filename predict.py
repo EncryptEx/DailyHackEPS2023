@@ -12,16 +12,16 @@ from keras.models import load_model
 
 loaded_model = load_model('./models/gesture_recognition_model.h5')
 
-reverselookup={0: '02_l',
- 1: '04_fist_moved',
- 2: '09_c',
- 3: '10_down',
- 4: '06_index',
- 5: '08_palm_moved',
- 6: '07_ok',
- 7: '05_thumb',
- 8: '01_palm',
- 9: '03_fist'}
+reverselookup={0: 'L',
+ 1: 'PUNY',
+ 2: 'C',
+ 3: 'ABAIX',
+ 4: 'DIT_INDEX',
+ 5: 'PUNY',
+ 6: 'OK',
+ 7: 'POLZE',
+ 8: 'POLZE',
+ 9: 'PUNY'}
 
 
 
