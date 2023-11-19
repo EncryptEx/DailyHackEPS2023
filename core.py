@@ -13,8 +13,9 @@ counter = 0
 
 def clearFilesOnFolder(folder):
     for filename in os.listdir(folder):
-        file_path = os.path.join(folder, filename)
-        os.unlink(file_path)
+        if filename.startswith('img-'):
+            file_path = os.path.join(folder, filename)
+            os.unlink(file_path)
 
 clearFilesOnFolder('./captured-imgs/')
 
