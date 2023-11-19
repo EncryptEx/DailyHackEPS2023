@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="/eel.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <!-- bootstrap5 -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
+    <title>TranslateMe</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="row" id="main">
+            <div class="col-6">
+                <div class="videoContainer">
+                    <video id="video" class="w-100 h-auto rounded" autoplay></video>
+
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="camera">
+                    <p id="timeLeft"></p>
+            
+                    <!-- from group with label nd number input -->
+                    <div class="form-group">
+                        <label for="number">Number of chars</label>
+                        <input type="number" class="form-control" id="number" placeholder="Enter number" required>
+                    </div>
+            
+            
+                    <button id="startbutton" class="btn btn-primary" type="submit">Take photo</button>
+                    <button id="finishbutton" class="btn btn-success" type="submit" disabled>Convert!</button>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <hr>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+
+
+
+    
+    <script src="script.js"></script>
+</body>
+
+</html>
