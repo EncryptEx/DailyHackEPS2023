@@ -8,36 +8,38 @@ import numpy as np
 
 
 from keras.models import load_model
+
 loaded_model = load_model("./models/gesture_recognition_model.h5")
 
 globalResult = {}
 
+
 def getPredictedGestures():
     global globalResult
     reverselookup = {
-        0: "L",
-        1: "PUNY",
-        2: "C",
-        3: "ABAIX",
-        4: "DIT_INDEX",
-        5: "PUNY",
-        6: "OK",
-        7: "POLZE",
-        8: "POLZE",
-        9: "PUNY",
+        0: "02_l",
+        1: "04_fist_moved",
+        2: "09_c",
+        3: "10_down",
+        4: "06_index",
+        5: "08_palm_moved",
+        6: "07_ok",
+        7: "05_thumb",
+        8: "01_palm",
+        9: "03_fist",
     }
-    alphabet = {  
-        "PUNY" : 0,
-        "DIT_INDEX" : 1,
-        "L": 2,
-        "OK" : 3,
-        "C" : 4,
-        "ABAIX" : 5,
-        "POLZE" : 6,
-        "POLZE" : 8,
-        "PUNY" : 9,
+    alphabet = {
+        "03_fist": 0,
+        "06_index": 1,
+        "02_l": 2,
+        "07_ok": 3,
+        "09_c": 4,
+        "01_palm": 5,
+        "05_thumb": 6,
+        "04_fist_moved": 7,
+        "08_palm_moved": 8,
+        "10_down": 9,
     }
-    
 
     predicted_gestures = []
     files = []
@@ -59,15 +61,18 @@ def getPredictedGestures():
             predicted_gesture = reverselookup[predicted_class]
             predicted_gestures.append(predicted_gesture)
 
-    globalResult = {files[i]: alphabet[predicted_gestures[i]] for i in range(len(predicted_gestures))}
+    globalResult = {
+        files[i]: alphabet[predicted_gestures[i]]
+        for i in range(len(predicted_gestures))
+    }
     return globalResult
 
 
 def convertToText(numbers: list):
     text = ""
-    for i in range(0, len(numbers),2):
+    for i in range(0, len(numbers), 2):
         newNum = f"{numbers[i]}{numbers[i+1]}"
-        text += chr(41+(int(newNum)))
+        text += chr(41 + (int(newNum)))
     return text
 
 
