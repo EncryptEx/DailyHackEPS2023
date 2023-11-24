@@ -6,10 +6,11 @@ Welcome to the DailyHackEPS2023 repository! This project is an integral part of 
 
 For an in-depth understanding of the challenge and its nuances, please refer to the [challenge description (in Catalan)](https://github.com/FerranAD/dailyhack2023/blob/main/README.md).
 
-## Important info about this solution
+## Important info about this project
 
 ### How to use the app
 You'll be prompted with a camera, and an input asking for a set of characters you want to express.
+
 For instance if you want to express the word `Hello`, it is 4 chars length.
 
 Since our latin alphabet has 26 chars, we'll need 2 photos per char to decide which char we're going to use.
@@ -43,7 +44,8 @@ Well, I thought I'd the easiest to learn, since we can remember thanks to this m
 6. The first finger when we need to count >5 (6 is the firsts) with our hands
 7,8,9 High numbers which you'll need to remember :D (come on, there are only 3 numbers with no reason, JUST 3!)
 
-Once the alphabet is encoded using UNICODE, **take in mind that A=00, B=01, C=02 .... Z=26 **
+Once the alphabet is encoded using UNICODE, **take in mind that A=00, B=01, C=02 .... Z=26**
+
 You can use this as a reference:
 ```
 A = 1
@@ -105,10 +107,6 @@ The `captureImgs.py` script facilitates seamless image capture and storage on th
 
 Python3, coupled with the Eel library, efficiently powers the desktop application, bridging the gap between front-end and back-end development.
 
-## Production Deploy
-Just download the executable file I've prepared inside the GitHub section called Releases.
-
-
 ## Development Deploy
 
 To begin with DailyHackEPS2023:
@@ -124,3 +122,14 @@ To begin with DailyHackEPS2023:
 ## Contribution Guidelines
 
 Contributions are welcome. Review our [contribution guidelines](CONTRIBUTING.md) before getting started.
+
+----
+
+### Production Deploy
+Sorry ran out of time, if you want you can build it, but make sure it builds along with the `web` folder, the `models` folder, and the `core.py`, `captureImgs.py`, `predict.py`, as well as all pip requirements and reserves and empty folder called `captured-imgs`, where snaped photos will pop up.
+
+Some documentation that might help:
+
+[Eel build documentation](https://github.com/python-eel/Eel#building-distributable-binary-with-pyinstaller)
+
+[PyInstaller documentation](https://pyinstaller.org/en/stable/)
