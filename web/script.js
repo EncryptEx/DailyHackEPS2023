@@ -18,7 +18,7 @@
     let canvas = document.getElementById("canvas0");
     let photo = null;
     let startbutton = null;
-    let finishbutton = null;
+    let loadingText = null;
     let counter = 0;
 
     function showViewLiveResultButton() {
@@ -43,7 +43,7 @@
         video = document.getElementById("video");
         photo = document.getElementById("photo");
         startbutton = document.getElementById("startbutton");
-        finishbutton = document.getElementById("finishbutton");
+        loadingText = document.getElementById("loadingText");
 
         navigator.mediaDevices
             .getUserMedia({ video: true, audio: false })
@@ -91,18 +91,7 @@
             },
             false,
         );
-        finishbutton.addEventListener(
-            "click",
-            (ev) => {
-                ev.preventDefault();
-                ev.stopImmediatePropagation();
-                eel.getPredictedGesturesResult()(function (ret) {
-                    console.log(JSON.stringify(ret, null, 4));
-                }
-                );
-            },
-            false,
-        );
+        
 
         clearphoto();
     }
@@ -134,24 +123,31 @@
 
         timeLeft.innerText = "Starting soon...";
         var x = setInterval(function () {
-            if (i >= number) {
+            if (i >= number*2) { // 2 PHOTOS PER CHAR
                 clearInterval(x);
-                eel.doPredictions();
-                finishbutton = document.getElementById("finishbutton");
+                eel.doPredictions()(function (ret1) {
+                    eel.getPredictedGesturesResult()(function (ret) {
+                        loadingText.style.display = 'none';
+                        console.log(JSON.stringify(ret, null, 4));
+                        renderResults(ret);
+                    }
+                    );
+                });
+                loadingText = document.getElementById("loadingText");
                 // enable button
-                finishbutton.disabled = false;
+                loadingText.style.display = 'block';
                 // disable take photo button
                 startbutton = document.getElementById("startbutton");
-                startbutton.disabled = true;
+                startbutton.style.display = 'none';
                 return;
             }
 
-            timeLeft.innerText = "3";
+            timeLeft.innerText = "Photo in 3! ("+(i+1)+"/"+number*2+")";
             setTimeout(function () {
-                timeLeft.innerText = "2";
+                timeLeft.innerText = "Photo in 2! ("+(i+1)+"/"+number*2+")";
                 setTimeout(function () {
 
-                    timeLeft.innerText = "1";
+                    timeLeft.innerText = "Photo in 1! ("+(i+1)+"/"+number*2+")";
                     setTimeout(function () {
                         timeLeft.innerText = "NOW!";
                         takepicture();
@@ -206,7 +202,41 @@
         }
     }
 
+
+    function renderResults(data){
+        
+        resultDiv = document.getElementById("results");
+        var newDiv;
+        
+        newDiv = document.createElement("div");
+        newDiv.style.border = "1px solid grey";
+        newDiv.className = "col-12 rounded p-2 m-2";
+        newDiv.innerHTML = "<p>Your translated HAND_GESTURE->UNICODE->STRING: <br><span id='resultDIV'>" + data + "</span></p>";
+        resultDiv.appendChild(newDiv);
+
+        // music stuff
+        var audio = document.getElementById("audio");
+        // change display to block
+        audio.style.display = "block";
+        // do the same with the play button
+        var playButton = document.getElementById("playButton");
+        playButton.style.display = "block";
+               
+    }
+
     // Set up our event listener to run the startup process
     // once loading is complete.
     window.addEventListener("load", startup, false);
+
+    // onclick play id
+   
+    
 })();
+
+function playSound() {
+    var audio = document.getElementById("audio");
+    // change the source
+    audio.src = "http://api.voicerss.org/?key=acfdd1d5aaf341119d62d2a18149096b&hl=ca-es&c=MP3&src="+document.getElementById("resultDIV").innerText;
+    // play the audio
+    audio.play();
+};  

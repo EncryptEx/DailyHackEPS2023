@@ -28,12 +28,29 @@
                     <!-- from group with label nd number input -->
                     <div class="form-group">
                         <label for="number">Number of chars</label>
-                        <input type="number" class="form-control" id="number" placeholder="Enter number" required>
+                        <input type="number" class="form-control" id="number" placeholder="Enter number" required min="1">
                     </div>
             
             
                     <button id="startbutton" class="btn btn-primary" type="submit">Take photo</button>
-                    <button id="finishbutton" class="btn btn-success" type="submit" disabled>Convert!</button>
+                    <!-- loading bs5 element -->
+                    <div class="spinner-border text-primary" role="status" id="loadingText" style="display:  none;">
+                        <span class="visually-hidden">Translating...</span>
+                    </div>
+                    <br>
+                    <br>
+                    <p>Results:</p>
+                    <div class="row" id="results">
+                        
+
+                            
+                        
+                    </div>
+                    
+                    <button style="display:none;" id="playButton" class="btn btn-primary" type="button" onclick="playSound();">Play TTS (catalan)</button>
+                    <!-- audio element -->
+                    <audio id="audio" style="display:none;">
+                        <source src="" type="audio/mpeg">
                 </div>
             </div>
             

@@ -8,7 +8,6 @@ import numpy as np
 
 
 from keras.models import load_model
-
 loaded_model = load_model("./models/gesture_recognition_model.h5")
 
 globalResult = {}
@@ -27,6 +26,18 @@ def getPredictedGestures():
         8: "POLZE",
         9: "PUNY",
     }
+    alphabet = {  
+        "PUNY" : 0,
+        "DIT_INDEX" : 1,
+        "L": 2,
+        "OK" : 3,
+        "C" : 4,
+        "ABAIX" : 5,
+        "POLZE" : 6,
+        "POLZE" : 8,
+        "PUNY" : 9,
+    }
+    
 
     predicted_gestures = []
     files = []
@@ -48,7 +59,18 @@ def getPredictedGestures():
             predicted_gesture = reverselookup[predicted_class]
             predicted_gestures.append(predicted_gesture)
 
-    globalResult = {files[i]: predicted_gestures[i] for i in range(len(predicted_gestures))}
+    globalResult = {files[i]: alphabet[predicted_gestures[i]] for i in range(len(predicted_gestures))}
+    return globalResult
+
+
+def convertToText(numbers: list):
+    text = ""
+    for i in range(0, len(numbers),2):
+        newNum = f"{numbers[i]}{numbers[i+1]}"
+        text += chr(41+(int(newNum)))
+    return text
+
 
 def getPredictedGesturesResult():
-    return globalResult
+    global globalResult
+    return convertToText(list(v for v in globalResult.values()))

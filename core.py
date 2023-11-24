@@ -17,7 +17,6 @@ def clearFilesOnFolder(folder):
             file_path = os.path.join(folder, filename)
             os.unlink(file_path)
 
-clearFilesOnFolder('./captured-imgs/')
 
 @eel.expose
 def doPredictions():
@@ -33,6 +32,8 @@ def sendPicture(data, canvasId):
 
 def showPic(data):
     global counter
+    if(counter == 0):
+        clearFilesOnFolder('./captured-imgs/')
     bytes_decoded = base64.b64decode(data)
 
     img = Image.open(BytesIO(bytes_decoded))
